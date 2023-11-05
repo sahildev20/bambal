@@ -18,9 +18,10 @@ import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 import { Textarea } from "../ui/textarea";
 import { is_base64_image } from "@/lib/utils";
-import {useUploadThing} from "@/lib/uploadthing";
+import { useUploadThing } from "@/lib/uploadthing";
 import { update_user } from "@/lib/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
+import { Bars } from 'react-loader-spinner'
 
 interface Props {
     user: {
@@ -35,6 +36,7 @@ interface Props {
 }
 const AccountProfile = ({ user, buttonTitle }: Props) => {
     // states 
+    const [uploading, setUploading] = useState(false)
     const [files, setFiles] = useState<File[]>([]);
     const router = useRouter();
     const pathname = usePathname();
@@ -42,17 +44,16 @@ const AccountProfile = ({ user, buttonTitle }: Props) => {
         "media",
         {
             onClientUploadComplete: () => {
-                console.log("uploaded successfully!");
-                alert("uploaded successfully!");
+                setUploading(false)
             },
             onUploadError: () => {
-                
+
                 console.log("error occurred while uploading");
-                alert("error occurred while uploading");
+                alert("error uploading image please try again!");
+                router.refresh()
             },
             onUploadBegin: () => {
-                alert("upload has begun");
-                console.log("upload has begun");
+                setUploading(true)
             },
         },
     );
@@ -77,9 +78,9 @@ const AccountProfile = ({ user, buttonTitle }: Props) => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0];
             setFiles(Array.from(e.target.files));
-            
-            if(!file.type.includes('image')) return;
-            fileReader.onload = async (event)=>{
+
+            if (!file.type.includes('image')) return;
+            fileReader.onload = async (event) => {
                 const imageDataUrl = event.target?.result?.toString() || '';
                 fieldChange(imageDataUrl);
             }
@@ -87,18 +88,22 @@ const AccountProfile = ({ user, buttonTitle }: Props) => {
             fileReader.readAsDataURL(file);
         }
     };
-    const onSubmit= async (values: z.infer<typeof UserValidation>) => {
+    const onSubmit = async (values: z.infer<typeof UserValidation>) => {
 
         const blob = values.profile_photo;
-        const has_image_changed = is_base64_image(blob);
+        const has_image_changed = await is_base64_image(blob);
 
-        if (has_image_changed){
+
+        if (has_image_changed) {
             const imageRes = await startUpload(files);
-            if (imageRes && imageRes[0].fileUrl){
-                values.profile_photo = imageRes[0].fileUrl;
+            if (imageRes && imageRes[0].url) {
+                values.profile_photo = imageRes[0].url;
+                console.log(imageRes[0].url)
             }
         }
+
         // to do backend to upload imageurl to mongodb
+        console.log(`Url to be uploaded : ${values.profile_photo}`)
         await update_user({
             name: values.name,
             username: values.username,
@@ -108,7 +113,7 @@ const AccountProfile = ({ user, buttonTitle }: Props) => {
             path: pathname,
         });
 
-        if(pathname === '/profile/edit'){
+        if (pathname === '/profile/edit') {
             router.back();
         } else {
             router.push('/');
@@ -128,7 +133,7 @@ const AccountProfile = ({ user, buttonTitle }: Props) => {
                     render={({ field }) => (
                         <FormItem className="flex items-center gap-4">
                             <FormLabel className="account-form_image-label">
-                                { field.value ? (
+                                {field.value ? (
                                     <img
                                         src={field.value}
                                         alt="profile picture"
@@ -231,6 +236,17 @@ const AccountProfile = ({ user, buttonTitle }: Props) => {
                 <Button type="submit" className="bg-secondary-500">
                     {buttonTitle}
                 </Button>
+                <div className="flex items-center justify-center">
+                    <Bars
+                        height="20"
+                        width="20"
+                        color="#4fa94d"
+                        ariaLabel="bars-loading"
+                        wrapperStyle={{}}
+                        wrapperClass=""
+                        visible={uploading}
+                    />
+                </div>
             </form>
         </Form>
     );

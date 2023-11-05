@@ -5,8 +5,8 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function is_base64_image(image_data: string){
-  const base64Regx = /^data:image\/(png|jpg?g|gif|webp);base64,/;
-  return base64Regx.test(image_data);
-}
+export async function is_base64_image(image_data: string){
+  const pattern = /^data:image\/(\w+);base64,([A-Za-z0-9+/=]+)$/;
 
+  return pattern.test(image_data);
+}

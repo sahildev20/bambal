@@ -57,10 +57,7 @@ export default function PostThread({ userId }: { userId: string }) {
                     control={form.control}
                     name="thread"
                     render={({ field }) => (
-                        <FormItem className="flex flex-col gap-3 w-full">
-                            <FormLabel className="text-base-semibold text-light-2">
-                                Content
-                            </FormLabel>
+                        <FormItem className="flex flex-col gap-3 w-full mt-10">
                             <FormControl className="no-focus border border-dark-3 text-light-1">
                                 <Textarea
                                     rows={10}
@@ -72,8 +69,8 @@ export default function PostThread({ userId }: { userId: string }) {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="bg-secondary-500">
-                    Post Thread
+                <Button type="submit" className="bg-secondary-500 w-fit">
+                    Post
                 </Button>
             </form>
         </Form>
