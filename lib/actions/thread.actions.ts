@@ -42,7 +42,7 @@ export async function fetch_threads(page_number = 1, page_size = 20) {
                 populate: {
                     path: 'author',
                     model: User,
-                    select: "_id name parent image"
+                    select: "_id name parent username image"
                 }
             })
 

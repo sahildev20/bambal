@@ -10,7 +10,7 @@ async function Page() {
     if (!userInfo?.onboarded) return redirect("/");
     return (
         <>
-            <h1 className="text-light-1 text-heading1-bold">Create Thread</h1>
+            <h1 className="text-light-1 text-heading1-bold">Create Post</h1>
             <PostThread userId={userInfo._id.toString()} />
         </>
     );

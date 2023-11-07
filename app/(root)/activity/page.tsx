@@ -13,8 +13,6 @@ export default async function Page() {
     const userInfo = await fetch_user(user.id)
     if(!userInfo?.onboarded) redirect('/onboarding')
     const activities = await get_activities(userInfo._id)
-    console.log(activities)
-
     return(
         <section className="">
             <h1 className="head-text text-light-1">Activity</h1>

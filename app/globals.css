@@ -131,7 +131,12 @@
 
 /* Tab */
 .tab {
-  @apply flex min-h-[50px] flex-1 items-center gap-3 bg-dark-2 text-light-2 data-[state=active]:bg-[#0e0e12] data-[state=active]:text-light-2 !important;
+  @apply grid w-full grid-cols-3 bg-transparent text-gray-1
+}
+
+.tab-item {
+  @apply data-[state=active]:bg-transparent transition-all data-[state=active]:border-b-2 data-[state]:border-lime-50 data-[state=active]:text-light-1 !important;
+
 }
 
 .no-focus {

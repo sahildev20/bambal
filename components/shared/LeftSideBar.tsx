@@ -11,7 +11,7 @@ export default function LeftSideBar() {
   const {userId} = useAuth()
   return (
     <section className="custom-scrollbar leftsidebar">
-      <div className="flex w-full flex-col flex-1 gap-6 px-6">
+      <div className="flex w-full flex-col flex-1 gap-3 px-6">
         {sidebar_links.map((link) => {
           const isActive =
             (pathname.includes(link.route) && link.route.length > 1) ||

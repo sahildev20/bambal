@@ -16,22 +16,26 @@ const communiy_schema = new mongoose.Schema({
     },
     image: String,
     bio: String,
-    admin: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-    },
     threads: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Thread",
         },
     ],
-    members: [
+    followers: [
         {
             type:mongoose.Schema.Types.ObjectId,
             ref: "User",
         },
     ],
+    followers_count:{
+        type:Number,
+        default:0
+    },
+    creator: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    }
 }, {timestamps:true})
 
 const Community = mongoose.models.Community || mongoose.model("Community", communiy_schema)

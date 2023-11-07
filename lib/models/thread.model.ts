@@ -11,6 +11,14 @@ const thread_schema = new mongoose.Schema({
         type:String,
         required:true,
     },
+    likes_count: {
+        type:Number,
+        default:0
+    },
+    replies_count:{
+        type:Number,
+        default:0
+    },
     community: {
         type: mongoose.Schema.Types.ObjectId,
         ref:'Community'

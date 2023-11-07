@@ -18,7 +18,37 @@ const user_schema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Community'
         }
-    ]
+    ],
+    love_threads:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'Thread'
+        }
+    ],
+    followers:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'User'
+        }
+    ],
+    followings:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'User'
+        }
+    ],
+    follower_count:{
+        type:Number,
+        default:0,
+    },
+    following_count:{
+        type:Number,
+        default:0,
+    },
+    threads_count:{
+        type:Number,
+        default:0,
+    },
 }, {timestamps:true});
 
 const User = mongoose.models.User || mongoose.model('User', user_schema);

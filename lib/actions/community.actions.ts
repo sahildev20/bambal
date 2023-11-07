@@ -12,12 +12,12 @@ export async function create_community(
     username: string,
     image: string,
     bio: string,
-    admin_id: string
+    creator: string
 ){
     try {
         connect_to_db();
         //
-        const user = await User.findOne({id:admin_id});
+        const user = await User.findOne({id:creator});
 
         if(!user) throw new Error(`User not Found! in create_community()`);
 
@@ -27,7 +27,7 @@ export async function create_community(
             username,
             image,
             bio,
-            admin: user._id
+            creator: user._id
         });
 
         const saved_community = await new_community.save();
@@ -110,7 +110,7 @@ export async function fetch_communities({
 
         const sort_options = {createdAt : sort_by}
 
-        const communities_query = Community.find(query).sort(sort_options).skip(skip_amount).limit(page_size).populate("members");
+        const communities_query = Community.find(query).sort(sort_options).skip(skip_amount).limit(page_size).populate("followers");
 
         const total_communities = await Community.countDocuments(query);
 
@@ -126,19 +126,19 @@ export async function fetch_communities({
 }
 
 //recieve objectId of community and user and add user to communnity and return community
-export async function add_member_to_community(community_id:string, member_id:string){
+export async function follow_community(community_id:string, user_id:string){
     connect_to_db();
     try {
         const community = await Community.findById(community_id)
-        if(!community) throw new Error(`Community not found at add_member`);
+        if(!community) throw new Error(`Community not found so failed to follow_community`);
 
-        const user = await User.findById(member_id);
-        if(!user) throw new Error(`User not found at add_member`);
+        const user = await User.findById(user_id);
+        if(!user) throw new Error(`User not found at so failed to follow_community`);
 
-        if(community.members.includes(member_id)){
-            throw new Error(`User is already member of that community!`)
+        if(community.follwers.includes(user_id)){
+            throw new Error(`User is already a follower of that community!`)
         }
-        community.members.push(member_id)
+        community.followers.push(user_id)
         await community.save()
 
         user.communities.push(community._id)
@@ -147,30 +147,29 @@ export async function add_member_to_community(community_id:string, member_id:str
         return community
 
     } catch (error) {
-        console.error(`Error add(member_to_community: ${error}`)
+        console.error(`Error at follow_community: ${error}`)
         throw error
     }
 }
 
-export async function remove_member_from_community(community_id:string, member_id:string){
+export async function unfollow_community(community_id:string, user_id:string){
     try {
         connect_to_db();
         await Community.updateOne(
             {_id: community_id},
-            {$pull : {members: member_id}}
+            {$pull : {followers: user_id}}
         )
 
         await User.updateOne(
-            {_id:member_id},
+            {_id:user_id},
             {$pull: {communites: community_id}}
         )
 
         return {success : true}
     } catch (error) {
-        console.error(`Error at remove_member: ${error}`);
+        console.error(`Error at unfollow_community: ${error}`);
         throw error;
     }
 }
-
 
 
