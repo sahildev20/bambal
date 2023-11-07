@@ -1,7 +1,7 @@
 import ProfileHeader from "@/components/shared/ProfileHeader";
-import { fetch_user } from "@/lib/actions/user.actions";
+import { fetch_user, is_follower,follow_user } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
-import { redirect } from "next/navigation";
+import { redirect, usePathname, useRouter } from "next/navigation";
 import { TabsList, TabsContent,TabsTrigger, Tabs} from "@/components/ui/tabs";
 import { profile_tabs } from "@/constants";
 import Image from "next/image";
@@ -18,17 +18,18 @@ export default async function Page(
     const target_userInfo = await fetch_user(params.id)
     if(!target_userInfo) return null
 
-    // const is_following = await is_follower(current_userInfo._id, target_userInfo._id)
-    // alert(is_following)
+    const pathname = '/profile'
 
     return(
         <section>
             <ProfileHeader
+            son_id = {current_userInfo._id}
+            dad_id = {target_userInfo._id}
             name={target_userInfo.name}
             username={target_userInfo.username}
             imageUrl={target_userInfo.image}
             bio= {target_userInfo.bio}
-            isFollowing= {true}
+            path = {pathname}
             />
             <div className="mt-6">
                 <Tabs defaultValue="threads" className="w-full">

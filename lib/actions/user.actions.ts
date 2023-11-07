@@ -5,7 +5,7 @@ import { connect_to_db } from "../mongoose"
 import User from "../models/user.model";
 import Thread from "../models/thread.model";
 import Community from "../models/community.model";
-import { FilterQuery, SortOrder } from "mongoose";
+import { FilterQuery, SortOrder, startSession } from "mongoose";
 
 interface Params {
     userId: string,
@@ -174,14 +174,14 @@ export async function like_the_thread(thread_id: string, user_id: string) {
         await user.save()
         const updated_thread = await Thread.findByIdAndUpdate(thread_id, { $inc: { likes_count: 1 } }, { new: true })
 
-        return {liked:true, likes_count:updated_thread.likes_count}
+        return { liked: true, likes_count: updated_thread.likes_count }
     } catch (error) {
         console.log(`Error at like_the_thread : ${error}`)
-        return {liked:false}
+        return { liked: false }
     }
 }
 
-export async function is_loved_thread(thread_id:string, user_id:string){
+export async function is_loved_thread(thread_id: string, user_id: string) {
     try {
         connect_to_db()
         const user = await User.findById(user_id)
@@ -195,4 +195,65 @@ export async function is_loved_thread(thread_id:string, user_id:string){
         return false
     }
 
+}
+
+export async function follow_user(son_id: string, dad_id: string) {
+    if (son_id === dad_id) {
+        console.log("cannot follow yourself")
+        throw new Error(`can not follow yourself`)
+    }
+    connect_to_db()
+    const sonSession = await startSession()
+    sonSession.startTransaction()
+    try {
+        const son = await User.findById(son_id)
+        if (!son) throw new Error("son not found at follow_user()")
+        const dad = await User.findById(dad_id)
+        if (!dad) throw new Error("dad not found at follow_user()")
+
+        const dad_index = son.followings.indexOf(dad_id)
+        const son_index = dad.followers.indexOf(son_id)
+
+        if (dad_index == -1 && son_index == -1) {
+            son.followings.push(dad_id)
+            dad.followers.push(son_id)
+            await son.save(sonSession)
+            await dad.save(sonSession)
+            await sonSession.commitTransaction()
+            sonSession.endSession()
+            return 'follow'
+        } else {
+
+            son.followings.splice(dad_index, 1)
+            dad.followers.splice(son_index, 1)
+            await son.save(sonSession)
+            await dad.save(sonSession)
+            await sonSession.commitTransaction()
+            sonSession.endSession()
+            return 'unfollow'
+        }
+
+
+
+
+    } catch (error: any) {
+        await sonSession.abortTransaction()
+        sonSession.endSession()
+        console.error(`Error at follow_user() : ${error.message}`)
+        return 'error'
+
+
+    }
+}
+
+
+export async function is_follower(son_id: string, dad_id: string, path: string) {
+    connect_to_db()
+    try {
+        const son = await User.findById(son_id)
+        return son.followings.includes(dad_id)
+    } catch (error: any) {
+        console.error(`Error at is_follower: ${error.message}`)
+
+    }
 }
