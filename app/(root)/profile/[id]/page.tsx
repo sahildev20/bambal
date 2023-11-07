@@ -15,7 +15,17 @@ export default async function Page(
     const current_userInfo = await fetch_user(current_user.id);
     if (!current_userInfo?.onboarded) return redirect("/");
 
-    const target_userInfo = await fetch_user(params.id)
+    let target_userInfo:any;
+    let same_user:boolean;
+    if(current_user.id == params.id){
+        target_userInfo = current_userInfo;
+        same_user = true
+    }else{
+        target_userInfo = await fetch_user(params.id)
+        same_user = false
+    }
+
+    
     if(!target_userInfo) return null
 
     const pathname = '/profile'
@@ -29,6 +39,7 @@ export default async function Page(
             username={target_userInfo.username}
             imageUrl={target_userInfo.image}
             bio= {target_userInfo.bio}
+            same_user={same_user}
             />
             <div className="mt-6">
                 <Tabs defaultValue="threads" className="w-full">

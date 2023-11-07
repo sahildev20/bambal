@@ -3,6 +3,7 @@
 import { follow_user, is_follower } from "@/lib/actions/user.actions";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import ShareCard from "../cards/ShareCard";
 
 interface Props {
   son_id: string;
@@ -11,6 +12,7 @@ interface Props {
   username: string;
   imageUrl: string;
   bio: string;
+  same_user?: boolean,
 }
 
 export default function ProfileHeader({
@@ -20,9 +22,11 @@ export default function ProfileHeader({
   username,
   imageUrl,
   bio,
+  same_user
 }: Props) {
   //frontend-part
   const [following, setFollowing] = useState(false);
+
   useEffect(() => {
     const fetch_status = async () => {
       const is_following = await is_follower(son_id, dad_id);
@@ -56,22 +60,27 @@ export default function ProfileHeader({
           className="rounded-full mt-24 object-cover relative top-0 left-0"
         />
       </div>
-      <div id="back0" className="z-10 w-full -mt-6 flex justify-end">
+      <div id="back0" className="z-10 w-full -mt-6 flex justify-end gap-2">
         {following ? (
           <button onClick={toggleFollow}
-          className="outline outline-2 outline-slate-500 text-white font-bold px-6 mr-4 rounded-full">
+          className="outline outline-2 outline-slate-500 text-white font-bold px-6 rounded-full">
             Following..
           </button>
         ) : (
           <button onClick={toggleFollow}
-          className="bg-white text-black font-bold px-6 rounded-full mr-4">
+          className="bg-white text-black font-bold px-6 rounded-full">
             Follow
           </button>
         )}
-
-        <button className="outline outline-2 outline-slate-500 text-white font-bold px-6 rounded-full">
+        <ShareCard
+        profile_url={`${process.env.NEXT_PUBLIC_APP_URL}profile/${username}`}
+        />
+        
+        {same_user && (
+          <button className="outline outline-2 outline-slate-500 text-white font-bold px-6 rounded-full">
           Edit
         </button>
+        )}
       </div>
       <div className="mt-2 flex flex-col items-start">
         <h2 className="text-left text-heading3-bold text-light-1">{name}</h2>
