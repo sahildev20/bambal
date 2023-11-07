@@ -4,6 +4,7 @@ import { follow_user, is_follower } from "@/lib/actions/user.actions";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import ShareCard from "../cards/ShareCard";
+import ProfileModal from "../modals/ProfileModal";
 
 interface Props {
   son_id: string;
@@ -77,9 +78,7 @@ export default function ProfileHeader({
         />
         
         {same_user && (
-          <button className="outline outline-2 outline-slate-500 text-white font-bold px-6 rounded-full">
-          Edit
-        </button>
+          <ProfileModal profile_url="Coming soon..." />
         )}
       </div>
       <div className="mt-2 flex flex-col items-start">

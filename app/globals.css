@@ -138,7 +138,9 @@
   @apply data-[state=active]:bg-transparent transition-all data-[state=active]:border-b-2 data-[state]:border-lime-50 data-[state=active]:text-light-1 !important;
 
 }
-
+.model-opened {
+  @apply data-[state=active]:bg-dark-2 transition-all
+}
 .no-focus {
   @apply focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
 }
