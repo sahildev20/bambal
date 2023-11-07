@@ -247,7 +247,7 @@ export async function follow_user(son_id: string, dad_id: string) {
 }
 
 
-export async function is_follower(son_id: string, dad_id: string, path: string) {
+export async function is_follower(son_id: string, dad_id: string) {
     connect_to_db()
     try {
         const son = await User.findById(son_id)

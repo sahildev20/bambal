@@ -11,7 +11,6 @@ interface Props {
   username: string;
   imageUrl: string;
   bio: string;
-  path:string;
 }
 
 export default function ProfileHeader({
@@ -21,13 +20,12 @@ export default function ProfileHeader({
   username,
   imageUrl,
   bio,
-  path,
 }: Props) {
   //frontend-part
   const [following, setFollowing] = useState(false);
   useEffect(() => {
     const fetch_status = async () => {
-      const is_following = await is_follower(son_id, dad_id, path);
+      const is_following = await is_follower(son_id, dad_id);
       console.log("son is following dad :", is_following);
       setFollowing(is_following);
     };

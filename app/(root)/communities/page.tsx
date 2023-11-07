@@ -10,22 +10,22 @@ import { redirect } from "next/navigation";
 
 export default async function Page() {
 
-    const user = await currentUser();
-    if (!user) return null;
-    const userInfo = await fetch_user(user.id);
-    if (!userInfo?.onboarded) return redirect("/");
+    const current_user = await currentUser();
+    if (!current_user) return null;
+    const current_userInfo = await fetch_user(current_user.id);
+    if (!current_userInfo?.onboarded) return redirect("/");
     const result = await fetch_threads(1, 30);
 
 
     return (
         <section>
             <ProfileHeader
-                accountId={userInfo.userId}
-                authUserId={user.id}
-                name={userInfo.name}
-                username={userInfo.username}
-                imageUrl={userInfo.image}
-                bio={userInfo.bio}
+            son_id = {current_userInfo._id}
+            dad_id = {current_userInfo._id}
+            name={current_userInfo.name}
+            username={current_userInfo.username}
+            imageUrl={current_userInfo.image}
+            bio= {current_userInfo.bio}
             />
             <h1 className="mt-4 text-heading2-bold text-light-1">Suggested Communities</h1>
             <p className="my-4 text-subtle-medium text-gray-1">No can only subscribe to communities.Only verified users can create communities. <Link href="/docs/verified-user-features" className="text-purple-500">Learn more</Link></p>
@@ -38,7 +38,7 @@ export default async function Page() {
                                 <ThreadCard
                                     key={thread._id}
                                     id={thread._id}
-                                    current_user_id={userInfo._id}
+                                    current_user_id={current_userInfo._id}
                                     author={thread.author}
                                     parent={thread.parent}
                                     content={thread.text}

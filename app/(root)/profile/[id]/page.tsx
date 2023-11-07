@@ -29,7 +29,6 @@ export default async function Page(
             username={target_userInfo.username}
             imageUrl={target_userInfo.image}
             bio= {target_userInfo.bio}
-            path = {pathname}
             />
             <div className="mt-6">
                 <Tabs defaultValue="threads" className="w-full">
