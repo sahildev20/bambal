@@ -4,19 +4,11 @@ import { follow_user, is_follower } from "@/lib/actions/user.actions";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import ShareCard from "../cards/ShareCard";
-import ProfileModal from "../modals/ProfileModal";
-
-interface Props {
-  son_id: string;
-  dad_id: string;
-  name: string;
-  username: string;
-  imageUrl: string;
-  bio: string;
-  same_user?: boolean,
-}
+import { ProfileHeaderProps } from "@/types";
+import Link from "next/link";
 
 export default function ProfileHeader({
+  authId,
   son_id,
   dad_id,
   name,
@@ -24,7 +16,7 @@ export default function ProfileHeader({
   imageUrl,
   bio,
   same_user
-}: Props) {
+}: ProfileHeaderProps) {
   //frontend-part
   const [following, setFollowing] = useState(false);
 
@@ -51,18 +43,21 @@ export default function ProfileHeader({
 
   return (
     <div id="main" className="flex flex-col justify-start">
-      <div className="w-full absolute top-0 left-0 h-64 bg-purple-500 z-0" />
+      <div className="w-full absolute top-0 left-0 h-40 bg-purple-500 z-0" />
       <div>
+        <div className="rounded-full mt-24 object-cover relative top-0 left-0 w-20 h-20">
         <Image
           src={imageUrl}
           alt="Profile Pic"
-          width={84}
-          height={84}
-          className="rounded-full mt-24 object-cover relative top-0 left-0"
+          fill
+          className="rounded-full object-cover"
         />
+        </div>
       </div>
-      <div id="back0" className="z-10 w-full -mt-6 flex justify-end gap-2">
-        {following ? (
+      <div id="back0" className="z-10 w-full -mt-6 sm:-mt-3 flex justify-end gap-2">
+        {!same_user && (
+          <div>
+            {following ? (
           <button onClick={toggleFollow}
           className="outline outline-2 outline-slate-500 text-white font-bold px-6 rounded-full">
             Following..
@@ -73,12 +68,16 @@ export default function ProfileHeader({
             Follow
           </button>
         )}
+          </div>
+        )}
         <ShareCard
         profile_url={`${process.env.NEXT_PUBLIC_APP_URL}profile/${username}`}
         />
         
         {same_user && (
-          <ProfileModal profile_url="Coming soon..." />
+          <Link href={`/profile/${authId}/edit`}>
+          <p className="outline outline-2 outline-slate-500 text-white font-bold px-6 rounded-full">Edit</p>
+          </Link>
         )}
       </div>
       <div className="mt-2 flex flex-col items-start">

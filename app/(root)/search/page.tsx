@@ -29,7 +29,7 @@ export default async function Page() {
             <h1 className="head-text mb-10">Search</h1>
             {/* TODO : render a search bar */}
 
-            <div className="felx mt-9 flex-col gap-6">
+            <div className="flex flex-col gap-4">
                 {result.users.length === 0 ? (
                     <p className="no-result">No Users Found</p>
 

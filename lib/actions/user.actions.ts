@@ -7,6 +7,7 @@ import Thread from "../models/thread.model";
 import Community from "../models/community.model";
 import { FilterQuery, SortOrder, startSession } from "mongoose";
 
+
 interface Params {
     userId: string,
     username: string,
@@ -14,6 +15,16 @@ interface Params {
     bio: string,
     image: string,
     path: string
+}
+
+export async function fetch_user_identity(userId: string){
+
+    connect_to_db();
+    try {
+        return await User.findOne({ userId }).select('_id onboarded username')
+    } catch (error:any) {
+        throw new Error(`Error while fetch_user: ${error.message}`)
+    }
 }
 
 export async function update_user({
@@ -46,6 +57,7 @@ export async function update_user({
         throw new Error(`Error while update_user: ${error.message}`)
     }
 }
+
 export async function fetch_user(userId: string) {
     connect_to_db();
     try {
@@ -120,7 +132,7 @@ export async function fetch_users({
             ]
         }
 
-        const users_query = User.find(query).sort(sort_options).skip(skip_amount).limit(page_size)
+        const users_query = User.find(query).sort(sort_options).skip(skip_amount).limit(page_size).select("name username _id image")
 
         const total_users_count = await User.countDocuments(query)
 
@@ -245,7 +257,6 @@ export async function follow_user(son_id: string, dad_id: string) {
 
     }
 }
-
 
 export async function is_follower(son_id: string, dad_id: string) {
     connect_to_db()

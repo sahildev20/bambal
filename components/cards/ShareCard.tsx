@@ -20,8 +20,6 @@ interface Props {
     profile_url:string;
   }
 
-
-
 function ShareCard( { profile_url}:Props) {
 
     const [alert, setAlert] = useState("")

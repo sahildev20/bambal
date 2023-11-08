@@ -12,6 +12,10 @@ export default function LeftSideBar() {
   return (
     <section className="custom-scrollbar leftsidebar">
       <div className="flex w-full flex-col flex-1 gap-3 px-6">
+      <Link href="/" className="flex items-center gap-3 mb-4">
+        <Image src="/logo.svg" alt="logo" width={28} height={28} priority />
+        <p className="text-heading3-bold text-light-1 max-xs:hidden">Bambal</p>
+      </Link>
         {sidebar_links.map((link) => {
           const isActive =
             (pathname.includes(link.route) && link.route.length > 1) ||

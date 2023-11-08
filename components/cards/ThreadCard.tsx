@@ -1,51 +1,28 @@
 import Image from "next/image";
 import Link from "next/link";
 import LikeButton from "../shared/LikeButton";
+import { ThreadProps } from "@/types";
+import { is_loved_thread } from "@/lib/actions/user.actions";
 
-interface Props {
-    id: string;
-    current_user_id: string;
-    parent: string;
-    content: string;
-    createdAt: string;
-    community: {
-        id: string;
-        name: string;
-        image: string;
-    } | null;
-
-    author: {
-        name: string;
-        username: string;
-        image: string;
-        userId: string;
-    }
-
-    comments: {
-        author: {
-            image: string;
-        }
-    }[]
-
-    username: string
-
-    isComment?: boolean
-
-
-}
-
-const ThreadCard = ({
+const ThreadCard = async ({
     id,
     current_user_id,
-    parent,
     content,
     author,
-    community,
-    createdAt,
     comments,
     username,
     isComment
-}: Props) => {
+}: ThreadProps) => {
+
+    const is_loved = await is_loved_thread(id, current_user_id)
+
+    // const loveTheThread = async() =>{
+    //     if(!is_loved){
+    //         await like_the_thread(thread_id, user_id)
+            
+    //     }
+    // }
+
     return (
         <article className={`flex w-full flex-col rounded-xl  ${isComment ? 'px-0 xs:px-7' : 'bg-dark-2 p-5'}`}>
             <div className="flex items-start justify-between">
@@ -67,7 +44,7 @@ const ThreadCard = ({
                         <p className="text-small-regular text-light-2">{content}</p>
                         <div className={`${isComment && 'mb-10'} mt-5 flex flex-col gap-3`}>
                             <div className="flex items-center gap-3.5 w-fit">
-                                <LikeButton thread_id={id} user_id={current_user_id} />
+                                <LikeButton thread_id={id.toString()} user_id={current_user_id.toString()} />
                                 <Link href={`/thread/${id}`}>
                                     <Image src="/assets/reply.svg" alt="reply" width={24} height={24}
                                         className="cursor-pointer object-contain" />
@@ -90,7 +67,5 @@ const ThreadCard = ({
             </div>
         </article>
     )
-
 }
-
 export default ThreadCard

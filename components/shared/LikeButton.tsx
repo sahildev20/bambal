@@ -4,13 +4,11 @@ import { is_loved_thread, like_the_thread } from "@/lib/actions/user.actions";
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { LikeButtonProps } from "@/types";
 
 
-interface Props {
-    thread_id: string;
-    user_id: string;
-}
-export default function LikeButton({ thread_id, user_id }: Props) {
+
+export default function LikeButton({ thread_id, user_id }: LikeButtonProps) {
     const [liked, setLiked] = useState(false)
 
     useEffect(() => {
