@@ -28,7 +28,14 @@ const Page = async () => {
         More account customizations coming soon !
       </p>
       <section className="mt-6 bg-dark-2 p-10">
-        <AccountProfile user={userData} buttonTitle="Continue" />
+        <AccountProfile
+          id={userData.id}
+          objectId={userData.objectId}
+          username={userData.username}
+          name={userData.name}
+          bio={userData.bio}
+          image={userData.image}
+          buttonTitle="Continue" />
       </section>
     </main>
   );

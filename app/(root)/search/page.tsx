@@ -1,8 +1,10 @@
 import UserCard from '@/components/cards/UserCard';
 import SearchBar from '@/components/shared/SearchBar';
+import SearchSkeleton from '@/components/skeleton/SearchSkeleton';
 import { fetch_user, fetch_users } from '@/lib/actions/user.actions';
 import { currentUser } from '@clerk/nextjs';
 import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
 
 export default async function Page({ searchParams }: { searchParams: { [key: string]: string | undefined } }) {
     const user = await currentUser();
@@ -27,24 +29,26 @@ export default async function Page({ searchParams }: { searchParams: { [key: str
 
             <SearchBar routeType='search' />
 
-            <div className='flex flex-col gap-6'>
-                {result.users.length === 0 ? (
-                    <p className='no-result'>No Users Found</p>
-                ) : (
-                    <>
-                        {result.users.map((singleUser) => (
-                            <UserCard
-                                key={singleUser.username}
-                                id={singleUser.userId}
-                                username={singleUser.username}
-                                name={singleUser.name}
-                                image={singleUser.image}
-                                userType='User'
-                            />
-                        ))}
-                    </>
-                )}
-            </div>
+            <Suspense fallback={<SearchSkeleton />} >
+                <section className='flex flex-col gap-6'>
+                    {result.users.length === 0 ? (
+                        <p className='no-result'>No Users Found</p>
+                    ) : (
+                        <>
+                            {result.users.map((singleUser) => (
+                                <UserCard
+                                    key={singleUser.username}
+                                    id={singleUser.userId}
+                                    username={singleUser.username}
+                                    name={singleUser.name}
+                                    image={singleUser.image}
+                                    userType='User'
+                                />
+                            ))}
+                        </>
+                    )}
+                </section>
+            </Suspense>
         </section>
     );
 }

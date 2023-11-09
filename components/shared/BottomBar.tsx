@@ -5,12 +5,12 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 
 export default function BottomBar() {
-    const pathname = usePathname()
-    const router = useRouter()
-    return(
-        <section className="bottombar">
-            <div className="bottombar_container">
-            {sidebar_links.map((link) => {
+  const pathname = usePathname()
+  const router = useRouter()
+  return (
+    <section className="bottombar">
+      <div className="bottombar_container">
+        {sidebar_links.map((link) => {
           const isActive =
             (pathname.includes(link.route) && link.route.length > 1) ||
             pathname === link.route;
@@ -19,7 +19,7 @@ export default function BottomBar() {
             <Link
               href={link.route}
               key={link.label}
-              className={`bottombar_link ${isActive && 'bg-primary-500'}`}
+              className={`bottombar_link ${isActive && 'bg-secondary-500'}`}
             >
               <Image
                 src={link.imgURL}
@@ -31,8 +31,8 @@ export default function BottomBar() {
             </Link>
           );
         })}
-            </div>
+      </div>
 
-        </section>
-    )
+    </section>
+  )
 }

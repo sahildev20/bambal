@@ -26,7 +26,7 @@ export interface ThreadProps {
     username: string
 
     isComment?: boolean
-
+    clickEnabled?: boolean
 
 }
 
@@ -35,8 +35,8 @@ export interface LikeButtonProps {
     user_id: string;
 }
 
-export interface UserCardProps{
-    id:string;
+export interface UserCardProps {
+    id: string;
     username: string;
     name: string;
     image: string;
@@ -45,7 +45,7 @@ export interface UserCardProps{
 
 
 export interface ProfileHeaderProps {
-    authId:string
+    authId: string
     son_id: string;
     dad_id: string;
     name: string;
@@ -53,4 +53,14 @@ export interface ProfileHeaderProps {
     imageUrl: string;
     bio: string;
     same_user?: boolean,
-  }
+}
+
+export interface AccountProfileProps {
+    id: string;
+    objectId: string;
+    username: string;
+    name: string;
+    bio: string;
+    image: string;
+    buttonTitle: string;
+}

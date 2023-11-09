@@ -37,14 +37,14 @@ export default function PostThread({ userId }: { userId: string }) {
         },
     });
 
-    const onSubmit = async(values:z.infer<typeof ThreadValidation>)=>{
+    const onSubmit = async (values: z.infer<typeof ThreadValidation>) => {
         await create_thread({
-            text:values.thread,
-            author:userId,
-            communityId:null,
-            path:pathname,
+            text: values.thread,
+            author: userId,
+            communityId: null,
+            path: pathname,
         });
-        
+
         router.push("/");
     }
     return (
@@ -69,7 +69,7 @@ export default function PostThread({ userId }: { userId: string }) {
                         </FormItem>
                     )}
                 />
-                <Button type="submit" className="bg-secondary-500 w-fit">
+                <Button type="submit" className="bg-secondary-500 ">
                     Post
                 </Button>
             </form>

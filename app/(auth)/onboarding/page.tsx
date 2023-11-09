@@ -5,7 +5,7 @@ import { redirect } from "next/navigation";
 
 export default async function Page() {
   const user = await currentUser();
-  if(!user) redirect('/sign-in')
+  if (!user) redirect('/sign-in')
   const userInfo = await fetch_user(user.id);
   const userData = {
     id: user?.id,
@@ -22,7 +22,14 @@ export default async function Page() {
         You can enjoy Bambal after completing your profile !
       </p>
       <section className="mt-10 bg-dark-2 p-10">
-        <AccountProfile user={userData} buttonTitle="Continue" />
+        <AccountProfile
+          id={userData.id}
+          objectId={userData.objectId}
+          username={userData.username}
+          name={userData.name}
+          bio={userData.bio}
+          image={userData.image}
+          buttonTitle="Continue" />
       </section>
     </main>
   );

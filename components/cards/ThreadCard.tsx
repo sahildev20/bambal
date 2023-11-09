@@ -11,7 +11,8 @@ const ThreadCard = async ({
     author,
     comments,
     username,
-    isComment
+    isComment,
+    clickEnabled,
 }: ThreadProps) => {
 
     const is_loved = await is_loved_thread(id, current_user_id)
@@ -19,7 +20,7 @@ const ThreadCard = async ({
     // const loveTheThread = async() =>{
     //     if(!is_loved){
     //         await like_the_thread(thread_id, user_id)
-            
+
     //     }
     // }
 
@@ -41,7 +42,15 @@ const ThreadCard = async ({
                             </h4>
                             <p className="text-gray-1 tiny-medium">@{username}</p>
                         </Link>
-                        <p className="text-small-regular text-light-2">{content}</p>
+                        {clickEnabled ? (
+                            <Link href={`/thread/${id}`}>
+                                <p className="text-small-regular text-light-2">{content}</p>
+                            </Link>
+                        ) : (
+                            <p className="text-small-regular text-light-2">{content}</p>
+
+                        )}
+
                         <div className={`${isComment && 'mb-10'} mt-5 flex flex-col gap-3`}>
                             <div className="flex items-center gap-3.5 w-fit">
                                 <LikeButton thread_id={id.toString()} user_id={current_user_id.toString()} />

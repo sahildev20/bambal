@@ -17,22 +17,22 @@ import { Label } from "@/components/ui/label";
 import { useState } from "react";
 
 interface Props {
-    profile_url:string;
+  profile_url: string;
+}
+
+function ShareCard({ profile_url }: Props) {
+
+  const [alert, setAlert] = useState("")
+
+  function copyText(txt: string) {
+    navigator.clipboard.writeText(txt);
+    setAlert("link has been copied!")
+    return
   }
-
-function ShareCard( { profile_url}:Props) {
-
-    const [alert, setAlert] = useState("")
-
-    function copyText(txt:string){
-        navigator.clipboard.writeText(txt);
-        setAlert("link has been copied!")
-        return
-    }
   return (
-    <Dialog onOpenChange={()=>setAlert("")}>
+    <Dialog onOpenChange={() => setAlert("")}>
       <DialogTrigger asChild>
-      <button className="outline outline-2 outline-slate-500 text-white font-bold px-6 rounded-full">
+        <button className="outline outline-2 outline-slate-500 text-white font-bold px-6 rounded-full">
           Share
         </button>
       </DialogTrigger>
@@ -55,14 +55,14 @@ function ShareCard( { profile_url}:Props) {
               readOnly
             />
           </div>
-          <Button type="submit" size="sm" className="px-3 rounded-lg bg-primary-500" onClick={()=>copyText(profile_url)}>
-          <p className="text-white text-subtle-medium">Copy Link</p>            
+          <Button type="submit" size="sm" className="px-3 rounded-lg bg-secondary-500" onClick={() => copyText(profile_url)}>
+            <p className="text-white text-subtle-medium">Copy Link</p>
           </Button>
         </div>
         <DialogFooter className="sm:justify-start items-center">
           <DialogClose asChild>
             <Button type="button" size="sm" variant="secondary">
-            <p className="text-subtle-medium">Close</p> 
+              <p className="text-subtle-medium">Close</p>
             </Button>
           </DialogClose>
           <p className="text-light-1">{alert}</p>

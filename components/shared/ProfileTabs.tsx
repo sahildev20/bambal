@@ -1,7 +1,3 @@
-import { redirect } from "next/navigation";
-import ThreadCard from "../cards/ThreadCard";
-import { fetch_community_threads } from "@/lib/actions/community.actions";
-import { fetch_user_threads } from "@/lib/actions/user.actions";
 import ThreadsTab from "../tabs/ThreadsTab";
 import RepliesTab from "../tabs/RepliesTab";
 import TaggedTab from "../tabs/TaggedTab";

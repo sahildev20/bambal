@@ -21,19 +21,11 @@ import { useUploadThing } from "@/lib/uploadthing";
 import { update_user } from "@/lib/actions/user.actions";
 import { usePathname, useRouter } from "next/navigation";
 import { Bars } from 'react-loader-spinner'
+import Image from "next/image";
+import { AccountProfileProps } from "@/types";
 
-interface Props {
-    user: {
-        id: string;
-        objectId: string;
-        username: string;
-        name: string;
-        bio: string;
-        image: string;
-    };
-    buttonTitle: string;
-}
-const AccountProfile = ({ user, buttonTitle }: Props) => {
+
+const AccountProfile = ({ id, objectId, username, name, bio, image, buttonTitle }: AccountProfileProps) => {
     // states 
     const [uploading, setUploading] = useState(false)
     const [files, setFiles] = useState<File[]>([]);
@@ -61,10 +53,10 @@ const AccountProfile = ({ user, buttonTitle }: Props) => {
     const form = useForm({
         resolver: zodResolver(UserValidation),
         defaultValues: {
-            profile_photo: user?.image || "",
-            name: user?.name || "",
-            username: user?.username || "",
-            bio: user?.bio || "",
+            profile_photo: image || "",
+            name: name || "",
+            username: username || "",
+            bio: bio || "",
         },
     });
     // handle image upload
@@ -108,7 +100,7 @@ const AccountProfile = ({ user, buttonTitle }: Props) => {
             username: values.username,
             image: values.profile_photo,
             bio: values.bio,
-            userId: user.id,
+            userId: id,
             path: pathname,
         });
 
@@ -133,11 +125,10 @@ const AccountProfile = ({ user, buttonTitle }: Props) => {
                         <FormItem className="flex items-center gap-4">
                             <FormLabel className="account-form_image-label">
                                 {field.value ? (
-                                    <img
+                                    <Image
                                         src={field.value}
                                         alt="profile picture"
-                                        width={96}
-                                        height={96}
+                                        fill
                                         className="rounded-full object-contain"
                                     />
                                 ) : (

@@ -1,17 +1,19 @@
 import ThreadCard from "@/components/cards/ThreadCard";
 import { fetch_threads } from "@/lib/actions/thread.actions";
-import { fetch_user, fetch_user_identity, is_loved_thread } from "@/lib/actions/user.actions";
+import { fetch_user_identity } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 import { Suspense } from "react";
 import ThreadSkeleton from "@/components/skeleton/ThreadSkeleton";
 
 export default async function Home() {
+
   const user = await currentUser();
   if (!user) return redirect('/sign-in');
   const userInfo = await fetch_user_identity(user.id);
   if (!userInfo?.onboarded) return redirect('/onboarding');
   const result = await fetch_threads(1, 30);
+
   return (
     <>
       <h1 className="head-text text-left">For You</h1>
@@ -33,6 +35,7 @@ export default async function Home() {
                   createdAt={thread.createdAt}
                   comments={thread.children}
                   username={thread.author.username}
+                  clickEnabled
                 />
               ))}
             </>
