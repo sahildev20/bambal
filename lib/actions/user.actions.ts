@@ -17,12 +17,12 @@ interface Params {
     path: string
 }
 
-export async function fetch_user_identity(userId: string){
+export async function fetch_user_identity(userId: string) {
 
     connect_to_db();
     try {
         return await User.findOne({ userId }).select('_id onboarded username')
-    } catch (error:any) {
+    } catch (error: any) {
         throw new Error(`Error while fetch_user: ${error.message}`)
     }
 }
@@ -109,10 +109,10 @@ export async function fetch_users({
     sort_by = "desc"
 }: {
     userId: string;
-    search_string: string;
-    page_number: number;
-    page_size: number;
-    sort_by: SortOrder;
+    search_string?: string;
+    page_number?: number;
+    page_size?: number;
+    sort_by?: SortOrder;
 
 }) {
     try {
