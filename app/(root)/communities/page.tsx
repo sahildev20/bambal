@@ -20,6 +20,7 @@ export default async function Page() {
     return (
         <section>
             <ProfileHeader
+            authId={current_user.id}
             son_id = {current_userInfo._id}
             dad_id = {current_userInfo._id}
             name={current_userInfo.name}
@@ -40,10 +41,7 @@ export default async function Page() {
                                     id={thread._id}
                                     current_user_id={current_userInfo._id}
                                     author={thread.author}
-                                    parent={thread.parent}
                                     content={thread.text}
-                                    community={thread.community}
-                                    createdAt={thread.createdAt}
                                     comments={thread.children}
                                     username={thread.author.username} />
                                     ))}
