@@ -1,14 +1,14 @@
 export interface ThreadProps {
     id: string;
     current_user_id: string;
-    // parent: string;
+    parent: string;
     content: string;
-    // createdAt: string;
-    // community: {
-    //     id: string;
-    //     name: string;
-    //     image: string;
-    // } | null;
+    createdAt: string;
+    community: {
+        id: string;
+        name: string;
+        image: string;
+    } | null;
 
     author: {
         name: string;

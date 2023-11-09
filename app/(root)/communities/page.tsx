@@ -1,7 +1,5 @@
 import ThreadCard from "@/components/cards/ThreadCard";
 import ProfileHeader from "@/components/shared/ProfileHeader";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Separator } from "@/components/ui/separator";
 import { fetch_threads } from "@/lib/actions/thread.actions";
 import { fetch_user } from "@/lib/actions/user.actions";
 import { currentUser } from "@clerk/nextjs";
@@ -41,7 +39,10 @@ export default async function Page() {
                                     id={thread._id}
                                     current_user_id={current_userInfo._id}
                                     author={thread.author}
+                                    parent={thread.parent}
                                     content={thread.text}
+                                    community={thread.community}
+                                    createdAt={thread.createdAt}
                                     comments={thread.children}
                                     username={thread.author.username} />
                                     ))}
