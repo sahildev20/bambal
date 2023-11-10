@@ -31,7 +31,7 @@ const AccountProfile = ({ id, objectId, username, name, bio, image, buttonTitle 
     const [files, setFiles] = useState<File[]>([]);
     const router = useRouter();
     const pathname = usePathname();
-    const { startUpload, permittedFileInfo } = useUploadThing(
+    const { startUpload } = useUploadThing(
         "media",
         {
             onClientUploadComplete: () => {
