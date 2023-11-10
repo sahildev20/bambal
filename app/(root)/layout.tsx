@@ -1,11 +1,12 @@
 import { Inter } from "next/font/google";
-import React from "react";
+import React, { Suspense } from "react";
 import "../globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import TopBar from "@/components/shared/TopBar";
 import LeftSideBar from "@/components/shared/LeftSideBar";
 import RightSideBar from "@/components/shared/RightSideBar";
 import BottomBar from "@/components/shared/BottomBar";
+import ThreadSkeleton from "@/components/skeleton/ThreadSkeleton";
 
 export const metadata = {
   title: "Salah",
@@ -28,8 +29,10 @@ export default function RootLayout({
             <LeftSideBar />
             <section className="main-container">
               <div className="w-full max-w-4xl">
-                {children}
-                </div>
+                <Suspense fallback={<ThreadSkeleton />} >
+                  {children}
+                </Suspense>
+              </div>
             </section>
             <RightSideBar />
           </main>
