@@ -14,16 +14,6 @@ export default async function Page() {
 
     return (
         <section>
-            <ProfileHeader
-                authId={current_user.id}
-                son_id={current_userInfo._id}
-                dad_id={current_userInfo._id}
-                name={current_userInfo.name}
-                username={current_userInfo.username}
-                imageUrl={current_userInfo.image}
-                bio={current_userInfo.bio}
-                same_user
-            />
             <h1 className="mt-4 text-heading2-bold text-light-1">Suggested Communities</h1>
             <p className="my-4 text-subtle-medium text-gray-1">No can only subscribe to communities.Only verified users can create communities. <Link href="/docs/verified-user-features" className="text-purple-500">Learn more</Link></p>
             <div className="flex flex-col gap-6">

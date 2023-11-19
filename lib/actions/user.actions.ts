@@ -132,7 +132,7 @@ export async function fetch_users({
             ]
         }
 
-        const users_query = User.find(query).sort(sort_options).skip(skip_amount).limit(page_size).select("name username _id image")
+        const users_query = User.find(query).sort(sort_options).skip(skip_amount).limit(page_size).select("name userId username _id image")
 
         const total_users_count = await User.countDocuments(query)
 
