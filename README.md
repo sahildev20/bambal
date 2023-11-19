@@ -1,24 +1,88 @@
-## Getting Started
+<a id="readme-top"></a>
+<br />
 
-First, run the development server:
+<div align="center">
+  <a href="https://bambal.vercel.com">
+    <img src="./public/logo.png" alt="Logo" width="80" height="80">
+  </a>
 
-Open [https://bambal.vercel.app](https://bambal.vercel.app) with your browser to see the result.
+  <h3 align="center">BAMBAL : LETS RUMBLE</h3>
 
-## Screeshots
-<img src="https://github.com/sahildev20/bambal/blob/ca05f09918458427d0aab5c0ac3eda86fc4a073b/public/screenshots/bambal-home.png">
+  <p align="center">
+    A social media app made to serve farmers of our country!
+    <br />
+  </p>
+</div>
+<p align="center">
+  <img alt="Github top language" src="https://img.shields.io/badge/nextjs-orange">
+  <img alt="Github top language" src="https://img.shields.io/badge/typescritp-cyan">
+  <img alt="Github top language" src="https://img.shields.io/badge/tailwindcss-orange">
+  <img alt="Github top language" src="https://img.shields.io/badge/clerk-cyan">
+  <img alt="Github top language" src="https://img.shields.io/badge/mongoose-orange">
+  <img alt="Github top language" src="https://img.shields.io/badge/uploadthing-cyan">
+</p>
 
+&#xa0;
 
-## Learn More
+<!-- ABOUT THE PROJECT -->
 
-To learn more about Next.js, take a look at the following resources:
+## About
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![Product Name Screen Shot](./public/screenshots/bambal-name.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+This is a social media app built in Nextjs using tailwindcss and mongodb.
+It allows users to to create profiles , post messages , like posts and comment on other posts and follow other users.
 
-## Deploy on Vercel
+<!-- USAGE -->
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Usage With Screenshots
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+
+- <h2>Visit Bambal</h2>
+  <p>First click on this link or visit https://bambal.vercel.app to open app</p>
+- <h2>Login using demo credentials</h2>
+  <p>Username = demouser and password = demo</p>
+  <img src="./public/screenshots/bambal-login.png" alt="Bambal Create-post Page" width="80%"/>
+- <h2>Explore posts</h2>
+  <p>You can click on home page to scroll all available posts.</p>
+  <img src="./public/screenshots/bambal-home.png" alt="Bambal Create-post Page" width="80%"/>
+
+- <h2>Create new post</h2>
+  <p>Click on create post enter message and hit post button.</p>
+  <img src="./public/screenshots/bambal-createpost.png" alt="Bambal Create-post Page" width="80%"/>
+
+- <h2>Search other users</h2>
+  <p>Click on Search button and enter keyword for users you can follow/unfollow other users here.</p>
+  <img src="./public/screenshots/bambal-search.png" alt="Bambal Create-post Page" width="80%"/>
+
+- <h2>Reply on post</h2>
+  <p>You can reply on any post by clicking on comment button  below post also each comment is a post in itself.</p>
+  <img src="./public/screenshots/bambal-reply.png" alt="Bambal Create-post Page" width="80%"/>
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- CONTACT -->
+
+## Contact
+
+Sahil Khan - [@your_twitter](https://twitter.com/your_username) - sahilvr300@gmail.com
+
+Project Link: [https://github.com/sahildev20/bambal](https://github.com/sahildev20/bambal)
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- ACKNOWLEDGMENTS -->
+
+## Acknowledgments
+
+Some resources that I followed during this project that may be helpfull for you as well!
+
+- [Nextjs Official docs](https://choosealicense.com)
+- [Clerk Official docs](https://www.webpagefx.com/tools/emoji-cheat-sheet)
+- [Uploadthing Official docs](https://flexbox.malven.co/)
+- [Tailwind cheatseat](https://grid.malven.co/)
+- [Mongoose Official docs](https://shields.io)
+- [Twitter for inspiration](https://pages.github.com)
+- [Threads for inspiration](https://fontawesome.com)
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
