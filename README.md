@@ -5,30 +5,26 @@
   <a href="https://bambal.vercel.com">
     <img src="./public/logo.png" alt="Logo" width="80" height="80">
   </a>
-
   <h3 align="center">BAMBAL : LETS RUMBLE</h3>
-
   <p align="center">
-    A social media app made to serve farmers of our country!
+    A social media app where users can share their opinions!
     <br />
   </p>
 </div>
-<p align="center">
+<h3 align="center">
   <img alt="Github top language" src="https://img.shields.io/badge/nextjs-orange">
   <img alt="Github top language" src="https://img.shields.io/badge/typescritp-cyan">
   <img alt="Github top language" src="https://img.shields.io/badge/tailwindcss-orange">
   <img alt="Github top language" src="https://img.shields.io/badge/clerk-cyan">
   <img alt="Github top language" src="https://img.shields.io/badge/mongoose-orange">
   <img alt="Github top language" src="https://img.shields.io/badge/uploadthing-cyan">
-</p>
+</h3>
 
 &#xa0;
 
 <!-- ABOUT THE PROJECT -->
 
 ## About
-
-![Product Name Screen Shot](./public/screenshots/bambal-name.png)
 
 This is a social media app built in Nextjs using tailwindcss and mongodb.
 It allows users to to create profiles , post messages , like posts and comment on other posts and follow other users.
@@ -37,10 +33,10 @@ It allows users to to create profiles , post messages , like posts and comment o
 
 ## Usage With Screenshots
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+In this section you can check screenshot and how you can use this app.
 
 - <h2>Visit Bambal</h2>
-  <p>First click on this link or visit https://bambal.vercel.app to open app</p>
+  <p>First click on this link <a href="https://bambal.vercel.app/sign-in">https://bambal.vercel.app</a> to open Bambal in browser</p>
 - <h2>Login using demo credentials</h2>
   <p>Username = demouser and password = demo</p>
   <img src="./public/screenshots/bambal-login.png" alt="Bambal Create-post Page" width="80%"/>
@@ -66,7 +62,9 @@ Use this space to show useful examples of how a project can be used. Additional 
 
 ## Contact
 
-Sahil Khan - [@your_twitter](https://twitter.com/your_username) - sahilvr300@gmail.com
+LinkedIn- [@Sahil Khan](https://www.linkedin.com/in/sahil-khan-655a391bb)
+
+Mail - sahilvr300@gmail.com
 
 Project Link: [https://github.com/sahildev20/bambal](https://github.com/sahildev20/bambal)
 
@@ -74,7 +72,7 @@ Project Link: [https://github.com/sahildev20/bambal](https://github.com/sahildev
 
 <!-- ACKNOWLEDGMENTS -->
 
-## Acknowledgments
+## References
 
 Some resources that I followed during this project that may be helpfull for you as well!
 
